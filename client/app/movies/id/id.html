@@ -1,0 +1,83 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="hero-unit" id="banner" ng-style="movieBackground != '' && {'background-image':'url('+movieBackground+')'}">
+	<h1>{{movie.title}}</h1>
+	<p class="lead"><em>{{movie.tagline}}</em></p>
+	<p><a class="label label-primary" ng-repeat="genre in movie.genres">{{genre.name}}</a></p>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			<p>
+				<img ng-src="{{moviePoster}}" />
+			</p>
+		</div>
+		<div class="col-md-7">
+			<div class="row">
+				<div class="col-xs-3">
+					<strong>Rating:</strong> {{movie.vote_average}}
+				</div>
+				<div class="col-xs-3">
+					<strong>Votes:</strong> {{movie.vote_count}}
+				</div>
+				<div class="col-xs-3">
+					<strong>Runtime:</strong> {{movie.runtime}} min
+				</div>
+				<div class="col-xs-3">
+					<strong>Release:</strong> {{movie.release_date}}
+				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-xs-12">
+					<p>{{movie.overview}}</p>
+				</div>
+			</div>
+			<hr />
+			<div class="row" ng-show="currentUrl">
+				<div class="col-xs-12">
+					<div class="fb-comments" 
+						data-href="{{currentUrl}}" 
+						data-numposts="5" 
+						data-colorscheme="light"
+						data-width="100%">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 recommendations">
+			<h3>{{allRecommendations.length + friendRecommendations.length}} Recommendations</h3>
+			<div class="row pictures">
+				<div class="col-xs-12">
+					<a  ng-repeat="recommendation in friendRecommendations" 
+						href="profile/{{recommendation.user._id}}"
+						tooltip="test"
+						tooltip-placement="top" 
+						tooltip-trigger="mouseenter">
+						<img ng-src="{{recommendation.user.profilePic}}" class="img-circle pull-left" width="34" />
+					</a>
+					<a  ng-repeat="recommendation in allRecommendations | limitTo: 8"  
+						href="profile/{{recommendation.user._id}}"
+						tooltip="{{recommendation.user.name}}"
+						tooltip-placement="top" 
+						tooltip-trigger="mouseenter">
+						<img ng-src="{{recommendation.user.profilePic}}" class="img-circle pull-left" width="34" />
+					</a>
+				</div>
+			</div>
+			<div class="row" ng-show="!friendsHasRecommended">
+				<div class="col-xs-12">
+					<p>None of your friends have recommended {{movie.title}}</p>
+				</div>
+			</div>
+			<div class="row" ng-show="!hasRecommended">
+				<div class="col-xs-12">
+					<button class="btn btn-primary" ng-click="recommend()">Recommend this movie</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

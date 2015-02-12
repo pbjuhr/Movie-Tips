@@ -1,0 +1,93 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Welcome, {{currentUser.name}}!</h1>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="well">
+        <h3>Recent recommendations</h3>
+        <table class="table table-recommendations">
+          <tr ng-repeat="recommendation in recentRecommendations">
+            <td width="40">
+              <a href="/profile/{{recommendation.user._id}}">
+                <img ng-src="{{recommendation.user.profilePic}}" class="img-circle pull-left" width="28" />
+              </a>
+            </td>
+            <td>
+              <a href="/movies/id/{{recommendation.movie.id}}">{{recommendation.movie.title}}</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="well">
+        <h3>Friends using Movie Tips</h3>
+        <div ng-show="facebookLoggedIn && friends.length < 1">
+          <p>
+            None of your friends are using Movie Tips :(
+          </p>
+          <p>
+            <button class="btn btn-primary">
+              <i class="fa fa-fw fa-facebook"></i>Tell your friends!
+            </button>
+          </p>
+        </div>
+        <div ng-show="facebookLoggedIn && friends.length > 0">
+          <table class="table table-friends">
+            <tr ng-repeat="friend in friends">
+              <td width="40">
+                <a href="/profile/{{friend.user._id}}">
+                  <img ng-src="{{friend.user.profilePic}}" class="img-circle pull-left" width="28" />
+                </a>
+              </td>
+              <td>
+                <a href="/profile/{{friend.user._id}}">{{friend.user.name}}</a>
+              </td>
+            </tr>
+          </table>
+          <button class="btn btn-primary">
+            <i class="fa fa-fw fa-facebook"></i>Tell more friends!
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="well genres">
+        <h3>Popular genres</h3>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Action</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Adventure</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Animation</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Biography</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Comedy</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Crime</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Documentary</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Drama</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Family</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Fantasy</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Film-Noir</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> History</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Horror</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Music</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Musical</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Mystery</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Romance</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Sci-Fi</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Sport</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Thriller</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> War</a>
+        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Western</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

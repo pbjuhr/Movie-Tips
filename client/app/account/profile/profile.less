@@ -1,0 +1,21 @@
+.label + .label{
+	margin-left: 4px;
+}
+
+.recommendations tr{
+	td {
+		vertical-align: middle !important;
+	}
+	a, a:link, a:visited{
+		text-decoration: none;
+	}
+	border-bottom: 1px solid #eee;
+	.label-danger{
+		opacity: 0;
+	}
+	&:hover{
+		.label-danger{
+			opacity: 1;
+		}
+	}
+}

@@ -1,0 +1,94 @@
+@import 'bootstrap/less/bootstrap.less';
+@import 'font-awesome/less/font-awesome.less';
+
+@icon-font-path: '/bower_components/bootstrap/fonts/';
+@fa-font-path: '/bower_components/font-awesome/fonts';
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+// injector
+@import 'account/friends/friends.less';
+@import 'account/login/login.less';
+@import 'account/profile/profile.less';
+@import 'bootswatch.less';
+@import 'main/main.less';
+@import 'movies/id/id.less';
+@import 'movies/top/top.less';
+@import 'variables.less';
+@import 'modal/modal.less';
+// endinjector
+
+.navbar{
+	.dropdown-toggle img{
+		margin-right: 2px;
+	}
+
+    a:hover{
+        color: white !important;
+        background-color: #1a242f !important;
+    }
+}
+
+.navbar-form{
+    margin-right: 30px;
+}
+
+.navbar-user{
+    margin-left: 90px !important;
+    .dropdown-toggle.active, .login.active{
+        background-color: #1a242f;
+        color: white;
+    }
+    ul.dropdown-menu{
+        .active{
+            background-color: #ddd;
+            color: @brand-primary;
+        }
+    }
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 70px;
+    border-top: 1px solid #E5E5E5;
+}
+
+img {
+	max-width: 100%;
+}
+
+a.label, span.label {
+    text-decoration: none;
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+ul.dropdown-menu {
+    li {
+        cursor: pointer;
+    }
+}
+
+.well{
+    h1, h2, h3{
+        margin-top: 0;
+        padding-top: 0;
+    }
+}
+
+.genres{
+    a.btn{
+        margin: 3px;
+    }
+}

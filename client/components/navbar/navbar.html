@@ -1,0 +1,65 @@
+<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Movie Tips</a>
+    </div>
+    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="navbar-form navbar-left">
+        <li>
+          <form role="search">
+            <div class="form-group">
+              <input 
+                type="text" 
+                ng-model="asyncSelected" 
+                placeholder="Search movies" 
+                typeahead="movie as movie.title for movie in getMovies($viewValue) | filter:{title:$viewValue}" 
+                typeahead-loading="loadingLocations"
+                typeahead-on-select="selectMovie($item, $model, $label)"
+                class="form-control" />
+                <i ng-show="loadingLocations" class="fa fa-spinner fa-spin" 
+                style="color: #bbb; position: relative; top: 2px; right: 34px;"></i>  
+            </div>
+          </form>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right navbar-user">
+        <li class="dropdown" ng-show="isLoggedIn">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+          ng-class="{active: isActive('/users/{{currentUser._id}}') || isActive('/settings')}" >
+            <img ng-src="{{currentUser.profilePic}}" class="img-circle" width="20" /> 
+            {{ currentUser.name }} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a ng-class="{active: isActive('/users/{{currentUser._id}}')}" href="/users/{{currentUser._id}}">
+              <i class="fa fa-fw fa-user"></i> Profile</a></li>
+            <li><a ng-class="{active: isActive('/settings')}" href="/settings"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
+            <li class="divider"></li>
+            <li><a href="#" ng-click="logout()"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
+          </ul>
+        </li>
+        <li ng-show="!isLoggedIn">
+            <a class="login" ng-class="{active: isActive('/login')}" href="/login">
+              <i class="fa fa-fw fa-user"></i> Login or register
+            </a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right navbar-items">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a ng-href="{{item.link}}"><i class="fa fa-fw fa-{{item.icon}}" ng-show="item.icon != null"></i> {{item.title}}</a>
+        </li>
+        <li ng-show="isLoggedIn" ng-class="{active: isActive('/friends')}">
+            <a href="/friends"><i class="fa fa-fw fa-users"></i> Friends</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

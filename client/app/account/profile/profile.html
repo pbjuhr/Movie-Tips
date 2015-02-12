@@ -1,0 +1,59 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>{{user.name}}</h1>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="well">
+				<p>
+					<img ng-src="{{user.profilePic}}" class="img-rounded" />
+				</p>
+				<p>
+					<strong>Gender: </strong> {{user.facebook.gender}}
+				</p>
+				<p ng-show="user.favoriteMovie">
+					<strong>Favorite movie: </strong> {{user.favoriteMovie}}
+				</p>
+			</div>
+		</div>
+		<div class="col-xs-9 recommendations">
+			<h3>{{allRecommendations.length}} Recommendation(s)</h3>
+			<table class="table table-hover">
+				<tbody>
+					<tr ng-repeat="(index, recommendation) in allRecommendations">
+						<td>
+							<a href="movies/id/{{recommendation.movie.id}}">
+								<img ng-src="{{recommendation.movie.poster_path}}" width="20" />
+							</a>
+						</td>
+						<td>
+							<a href="movies/id/{{recommendation.movie.id}}">
+								{{recommendation.movie.title}}
+							</a>
+						</td>
+						<td>
+							<span class="label label-primary" ng-repeat="genre in recommendation.movie.genres">{{genre.name}}</span>
+						</td>
+						<td class="text-right">
+							<a  ng-show="recommendation.user === currentUser._id"
+								ng-click="deleteRecommendation(recommendation, $index)"
+								tooltip="Remove this recommendation"
+								tooltip-placement="top" 
+								tooltip-trigger="mouseenter"
+								class="label label-danger" href="#">
+								<i class="fa fa-remove"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

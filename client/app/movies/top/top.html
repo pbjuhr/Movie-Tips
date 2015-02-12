@@ -1,0 +1,133 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9 col-md-push-3">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1>Top movies</h1>
+					<hr>
+				</div>
+			</div>
+			<table class="table table-hover table-movies">
+				<thead>
+					<tr>
+						<th width="5%" class="text-center">#</th>
+						<th width="5%"></th>
+						<th>
+							Title
+						</th>
+						<th width="20%" class="text-right">
+							<a href="#" ng-click="sort('recommendation_count')">
+								Recommendations
+								<i class="fa fa-fw fa-caret-down" ng-show="sortBy == 'recommendation_count' && orderBy == 'desc'"></i>
+								<i class="fa fa-fw fa-caret-up" ng-show="sortBy == 'recommendation_count' && orderBy == 'asc'"></i>
+							</a>
+						</th>
+						<th width="10%" class="text-right">
+							<a href="#" ng-click="sort('vote_average')">Rating</a>
+							<a href="#" ng-show="sortBy == 'vote_average'" ng-click="sort('vote_average')">
+								<i class="fa fa-fw fa-caret-down" ng-show="sortBy == 'vote_average' && orderBy == 'desc'"></i>
+								<i class="fa fa-fw fa-caret-up" ng-show="sortBy == 'vote_average' && orderBy == 'asc'"></i>
+							</a>
+						</th>
+						<th width="15%" class="text-right">
+							<a href="#" ng-click="sort('vote_count')">
+								Vote count
+								<i class="fa fa-fw fa-caret-down" ng-show="sortBy == 'vote_count' && orderBy == 'desc'"></i>
+								<i class="fa fa-fw fa-caret-up" ng-show="sortBy == 'vote_count' && orderBy == 'asc'"></i>
+							</a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="movie in movies | orderBy:ngRepeatOrderBy">
+						<td class="text-center" ng-show="currentPage == 1">
+							{{($index + 1)}}
+						</td>
+						<td class="text-center" ng-hide="currentPage == 1">
+							{{((currentPage - 1) * itemsPerPage) + ($index + 1)}}
+						</td>
+						<td>
+							<a href="movies/id/{{movie.id}}">
+								<img ng-src="{{movie.poster_path}}" width="20" />
+							</a>
+						</td>
+						<td>
+							<a href="movies/id/{{movie.id}}">
+								{{movie.title}}
+							</a>
+						</td>
+						<td class="text-right">
+							<strong ng-show="sortBy == 'recommendation_count'">{{movie.recommendation_count}}</strong>
+							<span ng-hide="sortBy == 'recommendation_count'">{{movie.recommendation_count}}</span>
+						</td>
+						<td class="text-right">
+							<strong ng-show="sortBy == 'vote_average'">{{movie.vote_average}}</strong>
+							<span ng-hide="sortBy == 'vote_average'">{{movie.vote_average}}</span>
+						</td>
+						<td class="text-right">
+							<strong ng-show="sortBy == 'vote_count'">{{movie.vote_count}}</strong>
+							<span ng-hide="sortBy == 'vote_count'">{{movie.vote_count}}</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<pagination 
+				ng-change="pageChanged()"
+				total-items="totalItems" 
+				items-per-page="itemsPerPage"
+				ng-model="currentPage" 
+				max-size="maxSize" 
+				class="pagination-md" 
+				boundary-links="true">
+			</pagination>
+		</div>
+		<div class="col-md-3 col-md-pull-9">
+			<div class="well">
+				<h3>Recent recommendations</h3>
+				<table class="table table-recommendations">
+					<tr ng-repeat="recommendation in recentRecommendations">
+						<td width="40">
+							<a href="/profile/{{recommendation.user._id}}">
+								<img ng-src="{{recommendation.user.profilePic}}" class="img-circle pull-left" width="28" />
+							</a>
+						</td>
+						<td>
+							<a href="/movies/id/{{recommendation.movie.id}}">{{recommendation.movie.title}}</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="well genres">
+				<h3>Genres</h3>
+				<table class="table">
+					<a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Action</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Adventure</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Animation</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Biography</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Comedy</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Crime</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Documentary</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Drama</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Family</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Fantasy</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Film-Noir</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> History</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Horror</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Music</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Musical</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Mystery</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Romance</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Sci-Fi</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Sport</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Thriller</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> War</a>
+			        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-tag"></i> Western</a>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

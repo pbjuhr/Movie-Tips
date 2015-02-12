@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('movietipsApp')
-	.controller('MainCtrl', function ($scope, $http, $window, Auth, Facebook) {
+	.controller('MainCtrl', function ($scope, $http, Auth, Facebook) {
 
 	$scope.currentUser = Auth.getCurrentUser();
 	$scope.recommendations = [];
@@ -55,11 +55,9 @@ angular.module('movietipsApp')
 	    	getFriends(token);
 	    } else if (response.status === 'not_authorized') {
 	    	$scope.facebookLoggedIn = true;
-	    	// The person is logged into Facebook, but not your app.
 	    } else {
 	    	$scope.facebookLoggedIn = false;
-			// The person is not logged into Facebook, so we're not sure if
-			// they are logged into this app or not
+
 	    }
 	}
 

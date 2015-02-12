@@ -49,6 +49,7 @@ angular.module('movietipsApp', [
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
+          console.log("route requires auth... send to login");
           $location.path('/login');
         }
       });

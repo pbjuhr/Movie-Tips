@@ -7,7 +7,7 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
-  profilePic: { type: String, default: "assets/img/user.jpg" },
+  profilePic: { type: String, default: "http://pbjuhr.se/test/user.jpg" },
   email: { type: String, lowercase: true },
   role: {
     type: String,

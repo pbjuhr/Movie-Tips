@@ -12,13 +12,13 @@ angular.module('movietipsApp')
       state('login', {
         url: '/login',
         templateUrl: 'app/account/login/login.html',
-        controller: 'LoginCtrl',
-        authenticate: false
+        controller: 'LoginCtrl'
       }).
       state('profile', {
         url: '/profile/:userId',
         templateUrl: 'app/account/profile/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        authenticate: true
       }).
       state('friends', {
         url: '/friends',

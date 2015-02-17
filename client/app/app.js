@@ -15,7 +15,7 @@ angular.module('movietipsApp', [
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-    FacebookProvider.init('330674693810189');
+    FacebookProvider.init('849605348434432');
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
@@ -32,6 +32,7 @@ angular.module('movietipsApp', [
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {
+          console.log("Intercepted 401 error...: " + JSON.stringify(response, null, 2));
           $location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');

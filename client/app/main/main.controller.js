@@ -82,8 +82,8 @@ angular.module('movietipsApp')
 	function getFriends(token) {
 		FB.api('/me/friends',{fields: 'id', access_token: token},function(response) {
 	    	$scope.$apply(function() {
-          		$scope.friends = response.data;
-          		angular.forEach($scope.friends, function(friend){
+          		angular.forEach(response.data, function(friend){
+          			console.log("found friend: " + friend.id);
           			addUserToFriend(friend);
           		});
             });
@@ -93,8 +93,9 @@ angular.module('movietipsApp')
   	function addUserToFriend(friend) {
   		return $http.get("/api/users/friend/"+friend.id).
 			success(function(data, status, headers, config) {
+				console.log("found user: " + data._id);
 				friend.user = data;
-				addRecommendationsToFriend(friend);
+				$scope.friends.push(friend);
 			}).
 			error(function(data, status, headers, config) {
 				console.log("could not find user");

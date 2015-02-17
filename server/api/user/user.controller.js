@@ -114,7 +114,7 @@ exports.friend = function(req, res, next) {
   var friendId = req.params.id;
   User.findOne({'facebook.id': friendId}, function (err, user) {
     if (err) return next(err);
-    if (!user) return res.send(401);
+    if (!user) return res.send(404);
     res.json(user.profile);
   });
 };

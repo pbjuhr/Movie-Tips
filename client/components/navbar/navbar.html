@@ -37,7 +37,7 @@
             {{ currentUser.name }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a ng-class="{active: isActive('/users/{{currentUser._id}}')}" href="/users/{{currentUser._id}}">
+            <li><a ng-class="{active: isActive('/profile/{{currentUser._id}}')}" href="/profile/{{currentUser._id}}">
               <i class="fa fa-fw fa-user"></i> Profile</a></li>
             <li><a ng-class="{active: isActive('/settings')}" href="/settings"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
             <li class="divider"></li>
